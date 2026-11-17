@@ -4,9 +4,17 @@ Project Java sederhana untuk mengelola karakter menggunakan class dan enum dalam
 
 ## TP8 — GUI dan Aliran Data
 
-### Screenshot MainWindow
+### Sebelum Perubahan
 
-![MainWindow TP8: lima karakter dan statistik rata-rata level](Sesudah_TP8.png)
+Berikut tampilan sebelum daftar karakter dinamis dan statistik rata-rata ditambahkan:
+
+![MainWindow sebelum perubahan TP8](Sebelum_Tp8.png)
+
+### Sesudah Perubahan
+
+Berikut MainWindow setelah menampilkan lima karakter secara dinamis beserta statistik rata-rata level:
+
+![MainWindow TP8 setelah perubahan: lima karakter dan statistik rata-rata level](Sesudah_TP8.png)
 
 ### Aliran Data dan MVC
 
