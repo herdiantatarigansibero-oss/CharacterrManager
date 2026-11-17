@@ -3,6 +3,7 @@ package com.unpri.charactermanager.view;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.BoxLayout;
 import java.util.ArrayList;
 import com.unpri.charactermanager.model.Character;
 
@@ -27,6 +28,28 @@ public class MainWindow extends JFrame {
     }
 
     private void initComponents() {
-        // akan diisi di Halaman 3
+        mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+
+        JLabel titleLabel = new JLabel("=== Daftar Karakter (" + characterList.size() + ") ===");
+        mainPanel.add(titleLabel);
+
+        int totalLevel = 0;
+        for (Character c : characterList) {
+            String info = c.getName() + " | " + c.getType() +
+                          " | Lv." + c.getLevel() +
+                          " | HP:" + c.getHitPoints() +
+                          " | ATK:" + c.getAttackPower();
+            JLabel characterLabel = new JLabel(info);
+            mainPanel.add(characterLabel);
+            totalLevel += c.getLevel();
+        }
+
+        double averageLevel = characterList.isEmpty()
+                ? 0
+                : (double) totalLevel / characterList.size();
+        mainPanel.add(new JLabel("Rata-rata Level: " + averageLevel));
+
+        add(mainPanel);
     }
 }

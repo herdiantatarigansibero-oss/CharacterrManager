@@ -1,6 +1,25 @@
-# Character Manager — TP3 & TP5 (Java Visual SIH-6406)
+# Character Manager — TP3, TP5 & TP8 (Java Visual SIH-6406)
 
 Project Java sederhana untuk mengelola karakter menggunakan class dan enum dalam package modular. Program mendemonstrasikan encapsulation, perhitungan statistik berdasarkan level, serta fitur mana dan status hidup karakter.
+
+## TP8 — GUI dan Aliran Data
+
+### Screenshot MainWindow
+
+![MainWindow TP8: lima karakter dan statistik rata-rata level](Sesudah_TP8.png)
+
+### Aliran Data dan MVC
+
+`Main` menyiapkan data karakter melalui `CharacterManager`, yang bertindak sebagai bagian Model untuk mengelola koleksi. `Main` lalu mengambil salinan koleksi dengan `getAllCharacters()` dan meneruskannya ke constructor `MainWindow`. `MainWindow` berperan sebagai View: ia mengiterasi data tersebut untuk menampilkan lima karakter dan menghitung rata-rata level. Dengan demikian, pengelolaan data berada di Model, sedangkan penyajian antarmuka berada di View dan `Main` mengoordinasikan keduanya.
+
+### Karakter Tambahan
+
+- **Brisa — HEALER, level 6:** dipilih sebagai karakter pendukung dengan level lebih tinggi agar variasi tipe dan statistik di daftar lebih terlihat.
+- **Raka — WARRIOR, level 2:** dipilih sebagai petarung pemula; levelnya yang rendah memberi kontras dengan karakter level tinggi seperti Brisa.
+
+### Google Docs Bagian D — TP08
+
+Analisis GUI dan MVC tersedia di [JavaVisual_TP08_253303621206_HERDIANTA_YUVENTUS_TARIGAN](https://docs.google.com/document/d/1lyS4s3MnoMAN-d1N3u7ndP_sj4a1jUguXlR-1vEaxYA/edit?tab=t.0). Dokumen dibagikan dengan akses **Anyone with the link — Viewer**.
 
 ## TP5 — Fitur dan Bukti
 
@@ -39,6 +58,7 @@ CharacterrManager/
 ├── screenshots/
 │   └── terminal-output.png
 ├── Bukti_Tp5.png
+├── Sesudah_TP8.png
 ├── src/
 │   ├── Main.java
 │   └── com/
@@ -57,4 +77,5 @@ CharacterrManager/
 
 - **Nama:** HERDIANTA YUVENTUS TARIGAN
 - **NIM:** 253303621206
-- **Google Docs Bagian D:** [JavaVisual_TP05_253303621206_HERDIANTA_YUVENTUS_TARIGAN](https://docs.google.com/document/d/1PoDj3Y5tiwgDwD7GP85kalqRDI7SEs2B9YtGIYjkgQs/edit?tab=t.0)
+- **Google Docs Bagian D TP5:** [JavaVisual_TP05_253303621206_HERDIANTA_YUVENTUS_TARIGAN](https://docs.google.com/document/d/1PoDj3Y5tiwgDwD7GP85kalqRDI7SEs2B9YtGIYjkgQs/edit?tab=t.0)
+- **Google Docs Bagian D TP8:** [JavaVisual_TP08_253303621206_HERDIANTA_YUVENTUS_TARIGAN](https://docs.google.com/document/d/1lyS4s3MnoMAN-d1N3u7ndP_sj4a1jUguXlR-1vEaxYA/edit?tab=t.0)
