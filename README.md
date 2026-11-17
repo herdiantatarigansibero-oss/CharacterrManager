@@ -1,6 +1,27 @@
-# Character Manager — TP3, TP5 & TP8 (Java Visual SIH-6406)
+# Character Manager — TP3, TP5, TP8 & TP10 (Java Visual SIH-6406)
 
 Project Java sederhana untuk mengelola karakter menggunakan class dan enum dalam package modular. Program mendemonstrasikan encapsulation, perhitungan statistik berdasarkan level, serta fitur mana dan status hidup karakter.
+
+## TP10 — Tema dan Kartu Karakter
+
+### Screenshot sebelum dan sesudah
+
+![Tampilan sebelum tema TP10](Sebelum_Tp10.png)
+
+![Tampilan sesudah tema TP10](Sesudsh_Tp10.png)
+
+### Pemisahan Tema
+
+Warna disimpan di `AppTheme` agar seluruh tampilan memakai palet yang konsisten dan perubahan tema dapat dilakukan di satu tempat. `Character` adalah bagian Model yang menyimpan data serta aturan karakter, bukan detail presentasi seperti warna layar. Pemisahan ini menjaga Model tetap dapat digunakan tanpa Swing dan mencegah logika tampilan tersebar ke dalam data domain.
+
+### Properti tambahan
+
+- **Tooltip berisi deskripsi role, HP, dan ATK:** memberi detail tambahan saat pengguna mengarahkan kursor tanpa membuat kartu utama lebih padat.
+- **Kartu level 1 dinonaktifkan:** menandai karakter pemula yang belum aktif dan membedakannya secara visual dari karakter siap pakai.
+
+### Analisis Bagian D
+
+Dokumen [JavaVisual_TP10_253303621206_HERDIANTA_YUVENTUS_TARIGAN](https://docs.google.com/document/d/1tpQgNeF5r8ub3siiprB1SKBX33Y6sMeUKBOOsReEV6U/edit?tab=t.0) memuat analisis lebih dari 500 kata tentang pola JavaBeans, JLabel opaque, ukuran dan layout Swing, pemisahan warna menurut MVC, serta logical font dan `deriveFont()`.
 
 ## TP8 — GUI dan Aliran Data
 
@@ -12,9 +33,9 @@ Berikut tampilan sebelum daftar karakter dinamis dan statistik rata-rata ditamba
 
 ### Sesudah Perubahan
 
-Berikut MainWindow setelah menampilkan lima karakter secara dinamis beserta statistik rata-rata level:
+Screenshot berikut menunjukkan MainWindow dengan lima karakter awal sebelum Naya ditambahkan:
 
-![MainWindow TP8 setelah perubahan: lima karakter dan statistik rata-rata level](Sesudah_TP8.png)
+![MainWindow TP8 sebelum penambahan Naya](Sesudah_TP8.png)
 
 ### Aliran Data dan MVC
 
@@ -24,6 +45,11 @@ Berikut MainWindow setelah menampilkan lima karakter secara dinamis beserta stat
 
 - **Brisa — HEALER, level 6:** dipilih sebagai karakter pendukung dengan level lebih tinggi agar variasi tipe dan statistik di daftar lebih terlihat.
 - **Raka — WARRIOR, level 2:** dipilih sebagai petarung pemula; levelnya yang rendah memberi kontras dengan karakter level tinggi seperti Brisa.
+- **Naya — ARCHER, level 1:** dipilih sebagai pemanah pemula, sekaligus memperlihatkan perlakuan khusus untuk karakter level 1.
+
+### Mini-Challenge dan Properti Tambahan
+
+Karakter dengan level minimal `AppTheme.HIGH_LEVEL_THRESHOLD` (5) ditampilkan dengan teks emas dan tebal; batasnya disimpan sebagai konstanta bernama agar mudah disesuaikan. Kartu juga memiliki dua properti tambahan: tooltip menampilkan deskripsi role beserta HP/ATK agar detail dapat dibaca tanpa memenuhi tampilan utama, dan kartu level 1 dinonaktifkan secara visual untuk menandai karakter pemula yang belum aktif.
 
 ### Google Docs Bagian D — TP08
 
@@ -67,6 +93,8 @@ CharacterrManager/
 │   └── terminal-output.png
 ├── Bukti_Tp5.png
 ├── Sesudah_TP8.png
+├── Sebelum_Tp10.png
+├── Sesudsh_Tp10.png
 ├── src/
 │   ├── Main.java
 │   └── com/
@@ -77,6 +105,7 @@ CharacterrManager/
 │               │   ├── CharacterManager.java
 │               │   └── CharacterType.java
 │               └── view/
+│                   ├── AppTheme.java
 │                   └── MainWindow.java
 └── README.md
 ```
@@ -87,3 +116,4 @@ CharacterrManager/
 - **NIM:** 253303621206
 - **Google Docs Bagian D TP5:** [JavaVisual_TP05_253303621206_HERDIANTA_YUVENTUS_TARIGAN](https://docs.google.com/document/d/1PoDj3Y5tiwgDwD7GP85kalqRDI7SEs2B9YtGIYjkgQs/edit?tab=t.0)
 - **Google Docs Bagian D TP8:** [JavaVisual_TP08_253303621206_HERDIANTA_YUVENTUS_TARIGAN](https://docs.google.com/document/d/1lyS4s3MnoMAN-d1N3u7ndP_sj4a1jUguXlR-1vEaxYA/edit?tab=t.0)
+- **Google Docs Bagian D TP10:** [JavaVisual_TP10_253303621206_HERDIANTA_YUVENTUS_TARIGAN](https://docs.google.com/document/d/1tpQgNeF5r8ub3siiprB1SKBX33Y6sMeUKBOOsReEV6U/edit?tab=t.0)
