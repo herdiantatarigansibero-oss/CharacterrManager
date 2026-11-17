@@ -2,6 +2,25 @@
 
 Project Java sederhana untuk mengelola karakter menggunakan class dan enum dalam package modular. Program mendemonstrasikan encapsulation, perhitungan statistik berdasarkan level, serta fitur mana dan status hidup karakter.
 
+## Wireframe MainWindow v0.5
+
+```text
++------------------------------------------------------------------+
+| JPanel header — BorderLayout.NORTH                               |
+|   JLabel judul                                                   |
++-----------------------------------------------+------------------+
+| JScrollPane — BorderLayout.CENTER             | JPanel legenda   |
+|   JPanel kartu karakter                       | BorderLayout.EAST|
+|   GridLayout(0, 1)                             | BoxLayout Y_AXIS|
+|                                               |                  |
++-----------------------------------------------+------------------+
+| JPanel status — BorderLayout.SOUTH                               |
+|   FlowLayout rata kiri                                           |
++------------------------------------------------------------------+
+```
+
+Panel utama menggunakan `BorderLayout`: header berada di utara, daftar kartu yang dapat digulir di tengah, legenda role di timur, dan status di selatan. Daftar karakter memakai `GridLayout(0, 1)` agar kartu tersusun satu kolom; legenda memakai `BoxLayout` pada sumbu Y agar chip role tersusun vertikal. Panel status menggunakan `FlowLayout` rata kiri.
+
 ## TP10 — Tema dan Kartu Karakter
 
 ### Screenshot sebelum dan sesudah
