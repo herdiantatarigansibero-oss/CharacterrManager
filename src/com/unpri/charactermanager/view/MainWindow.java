@@ -5,6 +5,8 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.Locale;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -45,9 +47,12 @@ public class MainWindow extends JFrame {
 
     /** NORTH: judul di kiri, jumlah karakter di kanan. */
     private JPanel createHeaderPanel() {
-        JPanel header = new JPanel(new BorderLayout());
-        header.setBackground(AppTheme.BG_MAIN);
-        header.setBorder(BorderFactory.createEmptyBorder(16, 16, 8, 16));
+        JPanel headerArea = new JPanel(new BorderLayout());
+        headerArea.setBackground(AppTheme.BG_MAIN);
+
+        JPanel titleRow = new JPanel(new BorderLayout());
+        titleRow.setBackground(AppTheme.BG_MAIN);
+        titleRow.setBorder(BorderFactory.createEmptyBorder(16, 16, 8, 16));
 
         JLabel title = new JLabel("Character Manager");
         title.setFont(AppTheme.FONT_TITLE);
@@ -57,9 +62,44 @@ public class MainWindow extends JFrame {
         count.setFont(AppTheme.FONT_BODY);
         count.setForeground(AppTheme.GOLD);
 
-        header.add(title, BorderLayout.WEST);
-        header.add(count, BorderLayout.EAST);
-        return header;
+        titleRow.add(title, BorderLayout.WEST);
+        titleRow.add(count, BorderLayout.EAST);
+        headerArea.add(titleRow, BorderLayout.NORTH);
+        headerArea.add(createStatisticsPanel(), BorderLayout.SOUTH);
+        return headerArea;
+    }
+
+    /** Ringkasan koleksi dalam empat sel berukuran seragam. */
+    private JPanel createStatisticsPanel() {
+        int totalLevel = 0;
+        int highestLevel = 0;
+        EnumSet<CharacterType> types = EnumSet.noneOf(CharacterType.class);
+        for (Character character : characterList) {
+            totalLevel += character.getLevel();
+            highestLevel = Math.max(highestLevel, character.getLevel());
+            types.add(character.getType());
+        }
+
+        double averageLevel = characterList.isEmpty()
+                ? 0.0
+                : (double) totalLevel / characterList.size();
+
+        JPanel statistics = new JPanel(new GridLayout(2, 2, 8, 4));
+        statistics.setBackground(AppTheme.BG_MAIN);
+        statistics.setBorder(BorderFactory.createEmptyBorder(4, 16, 8, 16));
+        statistics.add(createStatisticLabel("Total karakter: " + characterList.size()));
+        statistics.add(createStatisticLabel(
+                String.format(Locale.ROOT, "Rata-rata level: %.1f", averageLevel)));
+        statistics.add(createStatisticLabel("Level tertinggi: " + highestLevel));
+        statistics.add(createStatisticLabel("Variasi role: " + types.size()));
+        return statistics;
+    }
+
+    private JLabel createStatisticLabel(String text) {
+        JLabel label = new JLabel(text);
+        label.setFont(AppTheme.FONT_MONO);
+        label.setForeground(AppTheme.TEXT_MUTED);
+        return label;
     }
 
     /** CENTER: kartu karakter di dalam JScrollPane. */
