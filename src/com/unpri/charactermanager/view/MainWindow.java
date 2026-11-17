@@ -3,7 +3,6 @@ package com.unpri.charactermanager.view;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
@@ -18,10 +17,12 @@ import com.unpri.charactermanager.model.CharacterType;
 
 public class MainWindow extends JFrame {
 
+    private static final String APP_VERSION = "v0.5";
+
     private ArrayList<Character> characterList;
 
     public MainWindow(ArrayList<Character> characterList) {
-        super("Character Manager v0.5");
+        super("Character Manager " + APP_VERSION);
         this.characterList = characterList;
 
         initComponents();
@@ -135,15 +136,22 @@ public class MainWindow extends JFrame {
         return legend;
     }
 
-    /** SOUTH: bar status rata kiri. */
+    /** SOUTH: status di kiri dan versi aplikasi di kanan. */
     private JPanel createStatusPanel() {
-        JPanel status = new JPanel(new FlowLayout(FlowLayout.LEFT, 16, 6));
+        JPanel status = new JPanel(new BorderLayout(16, 0));
         status.setBackground(AppTheme.BG_STATUS);
+        status.setBorder(BorderFactory.createEmptyBorder(6, 16, 6, 16));
 
         JLabel lbl = new JLabel("Total: " + characterList.size() + " karakter  |  Siap");
         lbl.setFont(AppTheme.FONT_MONO);
         lbl.setForeground(AppTheme.TEXT_MUTED);
-        status.add(lbl);
+
+        JLabel version = new JLabel(APP_VERSION);
+        version.setFont(AppTheme.FONT_MONO);
+        version.setForeground(AppTheme.TEXT_MUTED);
+
+        status.add(lbl, BorderLayout.WEST);
+        status.add(version, BorderLayout.EAST);
         return status;
     }
 }

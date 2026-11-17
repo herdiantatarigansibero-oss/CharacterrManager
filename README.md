@@ -1,4 +1,4 @@
-# Character Manager — TP3, TP5, TP8 & TP10 (Java Visual SIH-6406)
+# Character Manager — TP3, TP5, TP8, TP10 & TP12 (Java Visual SIH-6406)
 
 Project Java sederhana untuk mengelola karakter menggunakan class dan enum dalam package modular. Program mendemonstrasikan encapsulation, perhitungan statistik berdasarkan level, serta fitur mana dan status hidup karakter.
 
@@ -15,11 +15,15 @@ Project Java sederhana untuk mengelola karakter menggunakan class dan enum dalam
 |                                               |                  |
 +-----------------------------------------------+------------------+
 | JPanel status — BorderLayout.SOUTH                               |
-|   FlowLayout rata kiri                                           |
+|   BorderLayout: status kiri, versi kanan                         |
 +------------------------------------------------------------------+
 ```
 
-Panel utama menggunakan `BorderLayout`: header berada di utara, daftar kartu yang dapat digulir di tengah, legenda role di timur, dan status di selatan. Daftar karakter memakai `GridLayout(0, 1)` agar kartu tersusun satu kolom; legenda memakai `BoxLayout` pada sumbu Y agar chip role tersusun vertikal. Panel status menggunakan `FlowLayout` rata kiri.
+Panel utama menggunakan `BorderLayout`: header berada di utara, daftar kartu yang dapat digulir di tengah, legenda role di timur, dan status di selatan. Daftar karakter memakai `GridLayout(0, 1)` agar kartu tersusun satu kolom; legenda memakai `BoxLayout` pada sumbu Y agar chip role tersusun vertikal. Bar status memakai `BorderLayout`, dengan informasi status di kiri dan versi di kanan. Saat jendela dilebarkan, kedua label tetap menempel di sisi masing-masing dan ruang tambahan berada di antara keduanya; konstanta versi yang sama juga dipakai pada judul jendela.
+
+## TP12 — Praktik Layout dan Bar Status
+
+Praktik TP12 menyempurnakan `MainWindow` v0.5 dengan menampilkan pesan status di sisi kiri bar bawah dan label versi di sisi kanan. Keduanya ditempatkan menggunakan `BorderLayout`, sehingga ketika jendela dilebarkan, label tetap berada di ujung masing-masing dan ruang tambahan mengisi bagian tengah. Nilai versi diambil dari satu konstanta `APP_VERSION` yang digunakan bersama oleh judul jendela dan label versi agar keduanya tidak berbeda. Bar status memakai `FONT_MONO` dan `TEXT_MUTED` agar tampil konsisten dengan tema aplikasi.
 
 ## TP10 — Tema dan Kartu Karakter
 
