@@ -8,6 +8,7 @@ Project Java sederhana untuk mengelola karakter menggunakan class dan enum dalam
 +------------------------------------------------------------------+
 | JPanel header — BorderLayout.NORTH                               |
 |   JLabel judul                                                   |
+|   JPanel statistik — GridLayout(2, 2)                             |
 +-----------------------------------------------+------------------+
 | JScrollPane — BorderLayout.CENTER             | JPanel legenda   |
 |   JPanel kartu karakter                       | BorderLayout.EAST|
@@ -23,7 +24,33 @@ Panel utama menggunakan `BorderLayout`: header berada di utara, daftar kartu yan
 
 ## TP12 — Praktik Layout dan Bar Status
 
+### Wireframe
+
+Diagram wireframe di atas menunjukkan header dengan ringkasan statistik, daftar kartu yang dapat digulir, legenda role, dan bar status. Struktur panel bersarang terdiri atas `headerArea` yang menampung baris judul dan panel statistik; panel statistik membagi empat metrik dalam `GridLayout(2, 2)`. Area daftar membungkus panel kartu di dalam `holder` lalu `JScrollPane`, sedangkan legenda memakai `BoxLayout` vertikal. Panel luar menggunakan `BorderLayout` agar header, daftar, legenda, dan status menempati wilayah yang terpisah.
+
+### Screenshot dan pengamatan resize
+
+Screenshot TP12 yang tersedia menunjukkan tampilan sebelum dan sesudah panel statistik ditambahkan. Keduanya menampilkan jendela v0.5 dengan delapan karakter; scrollbar daftar juga tampak. Bukti khusus jendela dilebarkan dan jendela yang dikecilkan belum tersedia karena percobaan menjalankan ulang aplikasi melalui debugger tetap timeout.
+
+![Tampilan TP12 sebelum panel statistik](Bukti_Tp12.png)
+
+![Tampilan TP12 setelah panel statistik](Sesudah_Tp12.png)
+
+Screenshot jendela dilebarkan dan jendela dikecilkan hingga scrollbar tampak: **belum tersedia**.
+
+| Ukuran jendela                     | Prediksi                                                                                        | Hasil pengamatan                                                                                                 |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Ukuran awal (`pack()`)             | Status di kiri, `v0.5` di kanan; daftar delapan kartu dapat digulir.                            | Terlihat pada screenshot setelah panel statistik: versi di kanan, status di kiri, dan scrollbar ada.             |
+| Dilebarkan                         | Kedua label bar status tetap di ujung kiri dan kanan; ruang tambahan berada di antara keduanya. | Belum diamati; screenshot ukuran lebar belum tersedia.                                                           |
+| Dikecilkan hingga scrollbar tampak | Scrollbar vertikal terlihat pada daftar; legenda dan bar status tetap di wilayah masing-masing. | Scrollbar tampak pada screenshot yang ada, tetapi perilaku khusus setelah jendela dikecilkan belum diverifikasi. |
+
 Praktik TP12 menyempurnakan `MainWindow` v0.5 dengan menampilkan pesan status di sisi kiri bar bawah dan label versi di sisi kanan. Keduanya ditempatkan menggunakan `BorderLayout`, sehingga ketika jendela dilebarkan, label tetap berada di ujung masing-masing dan ruang tambahan mengisi bagian tengah. Nilai versi diambil dari satu konstanta `APP_VERSION` yang digunakan bersama oleh judul jendela dan label versi agar keduanya tidak berbeda. Bar status memakai `FONT_MONO` dan `TEXT_MUTED` agar tampil konsisten dengan tema aplikasi.
+
+Panel statistik baru ditempatkan di bawah baris judul dan menggunakan `GridLayout(2, 2)` untuk menampilkan total karakter, rata-rata level, level tertinggi, dan jumlah variasi role dalam empat sel seragam. `GridLayout` dipilih karena setiap metrik mendapat ruang konsisten sehingga mudah dipindai. `FlowLayout` ditolak untuk panel ini karena ukuran dan pembungkusan komponennya mengikuti teks, sehingga ringkasan tidak tersusun sebagai kisi yang tetap. Daftar pengujian di `Main.java` memuat delapan karakter dengan variasi role dan level agar scrollbar serta statistik dapat diamati.
+
+### Google Docs Bagian D
+
+Analisis Bagian D TP12 tersedia di [JavaVisual_TP12_253303621206_HERDIANTA_YUVENTUS_TARIGAN](https://docs.google.com/document/d/1c1lU_HgMNg5ltiCjf79oesZlc1haKTKzjiyo-piKiaM/edit?tab=t.0).
 
 ## TP10 — Tema dan Kartu Karakter
 
@@ -114,8 +141,10 @@ Screenshot berikut menunjukkan output program TP3 di terminal, termasuk hasil pe
 CharacterrManager/
 ├── screenshots/
 │   └── terminal-output.png
+├── Bukti_Tp12.png
 ├── Bukti_Tp5.png
 ├── Sesudah_TP8.png
+├── Sesudah_Tp12.png
 ├── Sebelum_Tp10.png
 ├── Sesudsh_Tp10.png
 ├── src/
@@ -140,3 +169,4 @@ CharacterrManager/
 - **Google Docs Bagian D TP5:** [JavaVisual_TP05_253303621206_HERDIANTA_YUVENTUS_TARIGAN](https://docs.google.com/document/d/1PoDj3Y5tiwgDwD7GP85kalqRDI7SEs2B9YtGIYjkgQs/edit?tab=t.0)
 - **Google Docs Bagian D TP8:** [JavaVisual_TP08_253303621206_HERDIANTA_YUVENTUS_TARIGAN](https://docs.google.com/document/d/1lyS4s3MnoMAN-d1N3u7ndP_sj4a1jUguXlR-1vEaxYA/edit?tab=t.0)
 - **Google Docs Bagian D TP10:** [JavaVisual_TP10_253303621206_HERDIANTA_YUVENTUS_TARIGAN](https://docs.google.com/document/d/1tpQgNeF5r8ub3siiprB1SKBX33Y6sMeUKBOOsReEV6U/edit?tab=t.0)
+- **Google Docs Bagian D TP12:** [JavaVisual_TP12_253303621206_HERDIANTA_YUVENTUS_TARIGAN](https://docs.google.com/document/d/1c1lU_HgMNg5ltiCjf79oesZlc1haKTKzjiyo-piKiaM/edit?tab=t.0)
