@@ -139,7 +139,7 @@ Screenshot berikut menunjukkan output program TP3 di terminal, termasuk hasil pe
 
 ## **Google Docs Bagian D**
 
-[JavaVisual_TP03_253303621206_HERDIANTA_YUVENTUS_TARIGAN]((https://docs.google.com/document/d/1WNTNGIs7jUcQlxoX1jjfeCoGrAsvgfibWJWT-i9Np_I/edit?usp=sharing))
+[JavaVisual_TP03_253303621206_HERDIANTA_YUVENTUS_TARIGAN](https://docs.google.com/document/d/1WNTNGIs7jUcQlxoX1jjfeCoGrAsvgfibWJWT-i9Np_I/edit?usp=sharing)
 
 ## Struktur Project
 
@@ -175,7 +175,7 @@ CharacterrManager/
 - ---
 
 ## **Google Docs Bagian D**
--**Google Docs Bagian D TP3:**[JavaVisual_TP03_253303621206_HERDIANTA_YUVENTUS_TARIGAN](https://docs.google.com/document/d/1WNTNGIs7jUcQlxoX1jjfeCoGrAsvgfibWJWT-i9Np_I/edit?usp=sharing)
+- **Google Docs Bagian D TP3:**[JavaVisual_TP03_253303621206_HERDIANTA_YUVENTUS_TARIGAN](https://docs.google.com/document/d/1WNTNGIs7jUcQlxoX1jjfeCoGrAsvgfibWJWT-i9Np_I/edit?usp=sharing)
 - **Google Docs Bagian D TP5:** [JavaVisual_TP05_253303621206_HERDIANTA_YUVENTUS_TARIGAN](https://docs.google.com/document/d/1PoDj3Y5tiwgDwD7GP85kalqRDI7SEs2B9YtGIYjkgQs/edit?tab=t.0)
 - **Google Docs Bagian D TP8:** [JavaVisual_TP08_253303621206_HERDIANTA_YUVENTUS_TARIGAN](https://docs.google.com/document/d/1lyS4s3MnoMAN-d1N3u7ndP_sj4a1jUguXlR-1vEaxYA/edit?tab=t.0)
 - **Google Docs Bagian D TP10:** [JavaVisual_TP10_253303621206_HERDIANTA_YUVENTUS_TARIGAN](https://docs.google.com/document/d/1tpQgNeF5r8ub3siiprB1SKBX33Y6sMeUKBOOsReEV6U/edit?tab=t.0)
