@@ -8,18 +8,29 @@ import java.util.Objects;
  */
 public class CharacterManager {
 
+    /** Batas maksimal jumlah karakter dalam daftar (satu sumber kebenaran). */
+    public static final int MAX_CHARACTERS = 20;
+
     private final ArrayList<Character> characterList = new ArrayList<>();
 
     /**
-     * Menambahkan karakter jika belum ada karakter dengan nama yang sama.
+     * Menambahkan karakter jika daftar belum penuh dan belum ada karakter
+     * dengan nama yang sama (tanpa membedakan huruf besar/kecil).
      *
      * @param character karakter yang akan ditambahkan
      * @return true jika berhasil ditambahkan, false jika namanya duplikat
-     * @throws NullPointerException jika character null
+     * @throws NullPointerException     jika character null
+     * @throws IllegalArgumentException jika daftar sudah mencapai MAX_CHARACTERS
      */
     public boolean addCharacter(Character character) {
         Objects.requireNonNull(character, "Karakter tidak boleh null");
-        if (findByName(character.getName()) != null) {
+
+        if (isFull()) {
+            throw new IllegalArgumentException(
+                "Daftar penuh: maksimal " + MAX_CHARACTERS + " karakter.");
+        }
+
+        if (isNameTaken(character.getName())) {
             System.out.println("Gagal: karakter dengan nama '" + character.getName() + "' sudah ada.");
             return false;
         }
@@ -27,6 +38,34 @@ public class CharacterManager {
         characterList.add(character);
         System.out.println("Karakter '" + character.getName() + "' berhasil ditambahkan.");
         return true;
+    }
+
+    /**
+     * Memeriksa apakah daftar sudah mencapai batas maksimal.
+     *
+     * @return true jika jumlah karakter sudah MAX_CHARACTERS
+     */
+    public boolean isFull() {
+        return characterList.size() >= MAX_CHARACTERS;
+    }
+
+    /**
+     * Memeriksa apakah sudah ada karakter dengan nama yang sama
+     * (tanpa membedakan huruf besar/kecil, sehingga "arjuna" dianggap sama dengan "Arjuna").
+     *
+     * @param name nama yang akan diperiksa
+     * @return true jika nama sudah dipakai, false jika belum atau name null
+     */
+    public boolean isNameTaken(String name) {
+        if (name == null) {
+            return false;
+        }
+        for (Character character : characterList) {
+            if (name.equalsIgnoreCase(character.getName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
