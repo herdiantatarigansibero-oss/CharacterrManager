@@ -1,6 +1,42 @@
-# Character Manager — TP3, TP5, TP8, TP10 & TP12 (Java Visual SIH-6406)
+# Character Manager — TP3, TP5, TP8, TP10 , TP12 & TP14 (Java Visual SIH-6406)
 
 Project Java sederhana untuk mengelola karakter menggunakan class dan enum dalam package modular. Program mendemonstrasikan encapsulation, perhitungan statistik berdasarkan level, serta fitur mana dan status hidup karakter.
+
+## TP14 - Validasi Form dan Pemisahan View/Model
+
+### Screenshot
+
+**1. Error nama kosong**
+
+![Error nama kosong](Tp14_Namatidakbolehkosong.png)
+
+**2. Error nama duplikat**
+
+![Error nama duplikat](Tp14_Duplikat.png)
+
+**3. Sukses, kartu karakter baru tampil di daftar**
+
+![Sukses menambah karakter](Tp14_Sukseskartubaru.png)
+
+### Tabel Uji
+
+| #   | Input                                                       | Hasil diharapkan             | Hasil nyata | Lapisan yang menangkap              |
+| --- | ----------------------------------------------------------- | ---------------------------- | ----------- | ----------------------------------- |
+| 1   | Nama `"   "` (spasi saja)                                   | Ditolak, pesan nama kosong   | <isi>       | View (`validateName`)               |
+| 2   | Nama `"Athena"` (spasi ganda)                               | Ditolak, pesan spasi ganda   | <isi>       | View (`validateName`, tahap format) |
+| 3   | Nama sudah dipakai (`"Athena"` vs `"Athena"`)               | Ditolak, pesan nama duplikat | <isi>       | View (`isNameTaken()`)              |
+| 4   | MAGE, level 60                                              | Diterima                     | <isi>       | -                                   |
+| 5   | `new Character("Aldous", Warior, 5)` lewat kode, tanpa form | `IllegalArgumentException`   | <isi>       | Model                               |
+
+### Kompromi Sementara
+
+Pada tahap ini `ActionListener` tombol dibuat minimal, yaitu membaca input, memanggil `validateName`, lalu langsung memanggil `CharacterManager` dari dalam `CharacterFormPanel`. Cara ini membuat View masih mengetahui Model secara langsung, sehingga kopling antara keduanya lebih erat daripada yang ideal. Kompromi ini saya terima sementara karena alurnya mudah ditelusuri dan cukup untuk menguji validasi dua lapis. Pada tahap berikutnya, pemanggilan manager bisa dipindahkan ke lapisan perantara (controller) agar form hanya bertugas menampilkan dan mengumpulkan input.
+
+### Bagian D
+
+[Dokumen Google Docs Bagian D](https://docs.google.com/document/d/1zRfmCFn_--6ZSlJpIxB9I_0_PFdk5VAHy5ekmK37zHM/edit?usp=sharing)
+
+.
 
 ## Wireframe MainWindow v0.5
 
@@ -135,24 +171,31 @@ Screenshot berikut menunjukkan output program TP3 di terminal, termasuk hasil pe
 
 ![Screenshot output terminal Character Manager](screenshots/terminal-output.png)
 
----
+## <<<<<<< HEAD:README.md
 
 ## **Google Docs Bagian D**
 
 [JavaVisual_TP03_253303621206_HERDIANTA_YUVENTUS_TARIGAN](https://docs.google.com/document/d/1WNTNGIs7jUcQlxoX1jjfeCoGrAsvgfibWJWT-i9Np_I/edit?usp=sharing)
 
+=======
+
+> > > > > > > dfbdb83 (Menambahkan README sprint 6):src/com/unpri/charactermanager/view/Readme.md
+
 ## Struktur Project
 
 ```text
-CharacterrManager/
+CharacterManager/
 ├── screenshots/
 │   └── terminal-output.png
-├── Bukti_Tp12.png
 ├── Bukti_Tp5.png
 ├── Sesudah_TP8.png
-├── Sesudah_Tp12.png
 ├── Sebelum_Tp10.png
-├── Sesudsh_Tp10.png
+├── Sesudah_Tp10.png
+├── Bukti_Tp12.png
+├── Sesudah_Tp12.png
+├── Tp14_Namatidakbolehkosong.png
+├── Tp14_Duplikat.png
+├── Tp14_Sukseskartubaru.png
 ├── src/
 │   ├── Main.java
 │   └── com/
@@ -164,6 +207,7 @@ CharacterrManager/
 │               │   └── CharacterType.java
 │               └── view/
 │                   ├── AppTheme.java
+│                   ├── CharacterFormPanel.java
 │                   └── MainWindow.java
 └── README.md
 ```
@@ -172,11 +216,14 @@ CharacterrManager/
 
 - **Nama:** HERDIANTA YUVENTUS TARIGAN
 - **NIM:** 253303621206
-- ---
+
+---
 
 ## **Google Docs Bagian D**
+
 - **Google Docs Bagian D TP3:**[JavaVisual_TP03_253303621206_HERDIANTA_YUVENTUS_TARIGAN](https://docs.google.com/document/d/1WNTNGIs7jUcQlxoX1jjfeCoGrAsvgfibWJWT-i9Np_I/edit?usp=sharing)
 - **Google Docs Bagian D TP5:** [JavaVisual_TP05_253303621206_HERDIANTA_YUVENTUS_TARIGAN](https://docs.google.com/document/d/1PoDj3Y5tiwgDwD7GP85kalqRDI7SEs2B9YtGIYjkgQs/edit?tab=t.0)
 - **Google Docs Bagian D TP8:** [JavaVisual_TP08_253303621206_HERDIANTA_YUVENTUS_TARIGAN](https://docs.google.com/document/d/1lyS4s3MnoMAN-d1N3u7ndP_sj4a1jUguXlR-1vEaxYA/edit?tab=t.0)
 - **Google Docs Bagian D TP10:** [JavaVisual_TP10_253303621206_HERDIANTA_YUVENTUS_TARIGAN](https://docs.google.com/document/d/1tpQgNeF5r8ub3siiprB1SKBX33Y6sMeUKBOOsReEV6U/edit?tab=t.0)
 - **Google Docs Bagian D TP12:** [JavaVisual_TP12_253303621206_HERDIANTA_YUVENTUS_TARIGAN](https://docs.google.com/document/d/1c1lU_HgMNg5ltiCjf79oesZlc1haKTKzjiyo-piKiaM/edit?tab=t.0)
+- **Google Docs Bagian D TP14:** [JavaVisual_TP14_253303621206_HERDIANTA_YUVENTUS_TARIGAN](https://docs.google.com/document/d/1zRfmCFn_--6ZSlJpIxB9I_0_PFdk5VAHy5ekmK37zHM/edit?usp=sharing)
