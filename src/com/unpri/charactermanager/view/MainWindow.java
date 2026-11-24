@@ -1,11 +1,15 @@
 package com.unpri.charactermanager.view;
 
+import com.unpri.charactermanager.model.Character;
+import com.unpri.charactermanager.model.CharacterManager;
+import com.unpri.charactermanager.model.CharacterType;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Locale;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -14,18 +18,18 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import com.unpri.charactermanager.model.Character;
-import com.unpri.charactermanager.model.CharacterType;
 
 public class MainWindow extends JFrame {
 
     private static final String APP_VERSION = "v0.5";
 
-    private ArrayList<Character> characterList;
+    private final CharacterManager manager;
+    private List<Character> characterList;
 
-    public MainWindow(ArrayList<Character> characterList) {
+    public MainWindow(CharacterManager manager) {
         super("Character Manager " + APP_VERSION);
-        this.characterList = characterList;
+        this.manager = manager;
+        this.characterList = manager.getAllCharacters();
 
         initComponents();
 
@@ -40,9 +44,32 @@ public class MainWindow extends JFrame {
         setLayout(new BorderLayout());
 
         add(createHeaderPanel(), BorderLayout.NORTH);
+        add(new CharacterFormPanel(manager, this::refreshList), BorderLayout.WEST);
         add(createListArea(), BorderLayout.CENTER);
         add(createLegendPanel(), BorderLayout.EAST);
         add(createStatusPanel(), BorderLayout.SOUTH);
+    }
+
+    /** Dipanggil form setelah karakter berhasil ditambah: bangun ulang bagian yang bergantung pada data. */
+    private void refreshList() {
+        characterList = manager.getAllCharacters();
+
+        replaceRegion(BorderLayout.NORTH, createHeaderPanel());
+        replaceRegion(BorderLayout.CENTER, createListArea());
+        replaceRegion(BorderLayout.SOUTH, createStatusPanel());
+
+        revalidate();
+        repaint();
+    }
+
+    /** Mengganti komponen di satu wilayah BorderLayout tanpa menyentuh wilayah lain (form tetap utuh). */
+    private void replaceRegion(String position, Component replacement) {
+        BorderLayout layout = (BorderLayout) getContentPane().getLayout();
+        Component old = layout.getLayoutComponent(getContentPane(), position);
+        if (old != null) {
+            remove(old);
+        }
+        add(replacement, position);
     }
 
     /** NORTH: judul di kiri, jumlah karakter di kanan. */

@@ -5,11 +5,17 @@ import java.util.Objects;
 /**
  * Merepresentasikan satu karakter dalam aplikasi Character Manager.
  * Menerapkan prinsip Encapsulation: semua atribut private,
- * akses hanya melalui getter/setter.
+ * akses hanya melalui getter/setter. Semua aturan domain dijaga di sini,
+ * sehingga tetap berlaku walaupun View dilewati.
  */
 public class Character {
 
-    // ===== ATRIBUT (private — tidak bisa diakses langsung dari luar class) =====
+    // ===== KONSTANTA ATURAN (satu sumber kebenaran) =====
+    public static final int MIN_LEVEL = 1;
+    public static final int MAX_LEVEL = 99;
+    public static final int MAX_MAGE_LEVEL = 60;
+
+    // ===== ATRIBUT =====
     private int id;
     private String name;
     private CharacterType type;
@@ -18,18 +24,23 @@ public class Character {
     private int attackPower;
     private int mana;
 
-    // ===== CONSTRUCTOR 1: untuk membuat karakter BARU =====
-    // Dipakai saat user membuat karakter dari form (belum punya id dari database)
+    // ===== CONSTRUCTOR 1: karakter BARU dari form =====
     public Character(String name, CharacterType type, int level) {
-        this.name = name;              // "this" merujuk ke atribut milik object ini
+        validateName(name);
+        validateType(type);
+        validateLevel(level);
+        validateTypeAndLevel(type, level);   // aturan lintas-field
+
+        this.name = name.trim();
         this.type = type;
         this.level = level;
-        this.hitPoints = calculateBaseHP();      // HP dihitung otomatis dari level
-        this.attackPower = calculateBaseAttack(); // Attack dihitung otomatis dari level
+        this.hitPoints = calculateBaseHP();
+        this.attackPower = calculateBaseAttack();
     }
 
-    // ===== CONSTRUCTOR 2: untuk MEMUAT karakter dari database =====
-    // Dipakai saat data sudah ada (id dan statistik sudah final dari DB)
+    // ===== CONSTRUCTOR 2: MEMUAT karakter dari database =====
+    // Sengaja tidak divalidasi agar satu baris DB lama yang tidak valid
+    // tidak menggagalkan pemuatan seluruh daftar.
     public Character(int id, String name, CharacterType type, int level, int hitPoints, int attackPower) {
         this.id = id;
         this.name = name;
@@ -39,16 +50,43 @@ public class Character {
         this.attackPower = attackPower;
     }
 
-    // ===== HELPER PRIVATE: hanya dipakai internal class ini =====
+    // ===== VALIDASI (private static: dipakai konstruktor dan setter) =====
+    private static void validateName(String name) {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("Nama tidak boleh kosong");
+        }
+    }
+
+    private static void validateType(CharacterType type) {
+        if (type == null) {
+            throw new IllegalArgumentException("Role wajib dipilih");
+        }
+    }
+
+    private static void validateLevel(int level) {
+        if (level < MIN_LEVEL || level > MAX_LEVEL) {
+            throw new IllegalArgumentException("Level harus " + MIN_LEVEL + "-" + MAX_LEVEL);
+        }
+    }
+
+    // Aturan yang bergantung pada dua field sekaligus
+    private static void validateTypeAndLevel(CharacterType type, int level) {
+        if (type == CharacterType.MAGE && level > MAX_MAGE_LEVEL) {
+            throw new IllegalArgumentException(
+                "Karakter MAGE tidak boleh melebihi level " + MAX_MAGE_LEVEL + ".");
+        }
+    }
+
+    // ===== HELPER PRIVATE =====
     private int calculateBaseHP() {
-        return 100 + (level * 10);   // contoh: level 5 → HP = 150
+        return 100 + (level * 10);
     }
 
     private int calculateBaseAttack() {
-        return 10 + (level * 5);     // contoh: level 5 → Attack = 35
+        return 10 + (level * 5);
     }
 
-    // ===== GETTER: cara AMAN membaca nilai atribut private dari luar =====
+    // ===== GETTER =====
     public int getId() { return id; }
     public String getName() { return name; }
     public CharacterType getType() { return type; }
@@ -61,16 +99,19 @@ public class Character {
         return hitPoints > 0;
     }
 
-    // ===== SETTER: cara AMAN mengubah atribut, dengan VALIDASI =====
+    // ===== SETTER dengan VALIDASI =====
     public void setId(int id) {
         this.id = id;
     }
 
     public void setName(String name) {
-        this.name = name;
+        validateName(name);
+        this.name = name.trim();
     }
 
     public void setType(CharacterType type) {
+        validateType(type);
+        validateTypeAndLevel(type, this.level);   // cegah ganti ke MAGE saat level > 60
         this.type = type;
     }
 
@@ -90,15 +131,14 @@ public class Character {
     }
 
     public void setLevel(int level) {
-        if (level < 1) {                       // validasi: level tidak boleh kurang dari 1
-            throw new IllegalArgumentException("Level minimal adalah 1");
-        }
+        validateLevel(level);
+        validateTypeAndLevel(this.type, level);   // cegah MAGE naik di atas 60
         this.level = level;
-        this.hitPoints = calculateBaseHP();      // statistik dihitung ULANG setiap level berubah
+        this.hitPoints = calculateBaseHP();
         this.attackPower = calculateBaseAttack();
     }
 
-    // ===== toString(): representasi teks object, berguna untuk debugging =====
+    // ===== toString / equals / hashCode =====
     @Override
     public String toString() {
         return "Character{id=" + id +
